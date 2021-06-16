@@ -1,0 +1,51 @@
+<html>
+<div style="color: white;">WOOF EDITOR - WIP</div>
+<hr>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>woof</title>
+	<link href="depend/blocks/blocks.css" rel="stylesheet" type="text/css" />
+	<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body><button id='run' onclick="run();">run</button><button id='run' onclick="undocode();">undo</button>
+	<hr>
+	<div id="bjs_view"></div>
+	<hr>
+	</hr>
+	<div id="toolbox">
+		<script>
+    var showing = false;
+
+    function promptVar(){
+      console.log("prompting variable creation");
+      var var_name = prompt("Please enter variable name.", "foo");
+      var var_val = prompt("Please enter variable value, if your doing a string, please write like 'this'. ", "'foo'");
+      addcode("var " + var_name + " = " + var_val + ";","var");
+    }
+
+    function promptFunc(){
+      console.log("prompting function creation");
+      var f_name = prompt("Please enter function name. When making a variable, please end it using the end function button.", "foofunk");
+      addcode("function " + f_name + "(){","block");
+    }
+
+		function show(id) {
+			if (id == 'variables') {
+        if(showing==false){
+          showing = true;
+				  document.getElementById('showing').innerHTML = "<div id='variables'>variables <br><button onclick='promptVar()'>make variable</button><br>input a inny! make it a variable name.<br><textarea id='bjsinner'></textarea><button onclick='inner_set(evalname," + '"inny_log"' + ");'>set inner</button></div>";
+        }else{
+          showing = false;
+          document.getElementById('showing').innerHTML = "";
+        }
+			}
+		}
+		</script><button onclick="show('variables');">variables and function logic</button>
+		<p id="bjsinny_log"><button onclick="addcode('log(variable);','alert');">log</button></p>
+		<p id="bjsfunction"><button onclick="promptFunc()">add function</button><button onclick="addcode('variable();','block');">call function</button></p>
+		<p id="bjsif"><button onclick='addcode("if(variable){","if")'>if statement</button></p><button onclick="addcode('}','block');">end function</button>
+		<div id="showing"></div>
+		<script src="depend/blocks/blocks.js"></script>
+</body>
